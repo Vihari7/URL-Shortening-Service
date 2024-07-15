@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,37 +28,25 @@
            </div>
         </div>
 
-        <div class="conatiner">
+        <div class="conatiner" id="refresh">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <table class="table mt-4">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">long url</th>
+                            <th scope="col">short url</th>
+                            <th scope="col">clicks</th>
                             </tr>
                         </thead>
                         <tbody>
+                           <?php foreach($rows as $row) : ?>
                             <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                                <th scope="raw"><?php echo $row->url; ?></th>
+                                <td><a href="http://locahost/short-urls/u?id=<?php echo $row->id;?>" target=" _blank">http://localhost/short-urls/<?php $row->id;?></a></td>
+                                <td><?php echo $row->clicks;?></td>
                             </tr>
-                            <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                  </div>
@@ -69,7 +56,15 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" ></script>
-        <!-- Core theme JS-->
+        <script>
+            $(document).ready(function (){
+                $("#refresh").click(function(){
+                    setInterval(function(){
+                        $("body").load('index.php')
+                    },5000)
+                });
+            });
+        </script>
     </body>
 </html>
 
